@@ -25,7 +25,8 @@ module AudioProcessor
   # Get the name of the downloaded file
   def audio_file link
     stdout = `youtube-dl --get-title --no-playlist "#{link}"`
-    file_name = stdout.strip + '.mp3'
+    stdout.slice!(0) if stdout[0] == '/'
+    file_name = stdout.strip.gsub('/', '_').insert(0, '/') + '.mp3'
     return file_name
   end
 end

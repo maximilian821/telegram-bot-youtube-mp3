@@ -18,11 +18,11 @@ Telegram::Bot::Client.run(token) do |bot|
           Thread.new(link) do
             bot.api.send_message(chat_id: message.chat.id, text: "Please wait. Audio file is downloading...")
             # Downloads mp3 file locally
-            if get_audio_file_name(link)
+            if get_audio(link)
               puts 'Audio successfully downloaded'
               begin
                 # Gets the name of the file stored in /tmp folder
-                file_name = audio_file(link)
+                file_name = get_audio_file_name(link)
                 puts "File name received --- #{file_name}"
 
                 bot.api.send_audio(chat_id: message.chat.id, audio: Faraday::UploadIO.new("./tmp/#{file_name}", 'audio/mpeg'))

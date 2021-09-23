@@ -18,7 +18,7 @@ Telegram::Bot::Client.run(token) do |bot|
           Thread.new(link) do
             bot.api.send_message(chat_id: message.chat.id, text: "Please wait. Audio file is downloading...")
             # Downloads mp3 file locally
-            if get_audio(link)
+            if get_audio_file_name(link)
               puts 'Audio successfully downloaded'
               begin
                 # Gets the name of the file stored in /tmp folder
